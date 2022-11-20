@@ -9,6 +9,10 @@ enum AdaptiveMaterialType {
 }
 
 extension TypeHelpers on AdaptiveMaterialType {
+  /// Converts this material type to the corresponding color from the scheme
+  /// provided in the given context.
+  ///
+  /// This color is used by `AdaptiveMaterial` to draw the background surface.
   Color colorOf(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     switch (this) {
@@ -25,6 +29,11 @@ extension TypeHelpers on AdaptiveMaterialType {
     }
   }
 
+  /// Converts this material type to the corresponding on color from the scheme
+  /// provided in the given context.
+  ///
+  /// This color is used by `AdaptiveMaterial` to style all text widgets below
+  /// it.
   Color onColorOf(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     switch (this) {
@@ -39,5 +48,15 @@ extension TypeHelpers on AdaptiveMaterialType {
       case AdaptiveMaterialType.surface:
         return colorScheme.onSurface;
     }
+  }
+
+  /// Converts this material type to the corresponding secondary on color from
+  /// the scheme provided in the given context.
+  ///
+  /// This color is used by `AdaptiveMaterial` to style all icons below it.
+  Color secondaryOnColorOf(BuildContext context) {
+    // TODO(caseycrogers): create an extension of `ColorScheme` that allows
+    //  developers to explicitly set their `secondaryOnColor`.
+    return Color.lerp(colorOf(context), onColorOf(context), .8)!;
   }
 }
