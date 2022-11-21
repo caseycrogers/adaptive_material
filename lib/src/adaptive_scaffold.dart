@@ -66,8 +66,12 @@ class AdaptiveScaffold extends StatelessWidget {
       appBar: appBar,
       body: AdaptiveMaterial(
         material: backgroundMaterial,
+        // `Scaffold` will already draw the background color, no need to draw it
+        // here.
+        shouldDraw: false,
         child: body ?? Container(),
       ),
+      backgroundColor: backgroundMaterial.colorOf(context),
       floatingActionButton: floatingActionButton,
       floatingActionButtonLocation: floatingActionButtonLocation,
       floatingActionButtonAnimator: floatingActionButtonAnimator,

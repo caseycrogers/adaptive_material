@@ -1,5 +1,12 @@
+import 'package:adaptive_material/adaptive_material.dart';
 import 'package:flutter/material.dart';
 
+/// The material type to use for an [AdaptiveMaterial] widget.
+///
+/// Each entry corresponds to a `<value>`, `on<Value>` pair of attributes in
+/// [ColorScheme].
+///
+/// TODO(caseycrogers): Add values for the remaining eligible attribute pairs.
 enum AdaptiveMaterialType {
   primary,
   secondary,
@@ -57,6 +64,6 @@ extension TypeHelpers on AdaptiveMaterialType {
   Color secondaryOnColorOf(BuildContext context) {
     // TODO(caseycrogers): create an extension of `ColorScheme` that allows
     //  developers to explicitly set their `secondaryOnColor`.
-    return Color.lerp(colorOf(context), onColorOf(context), .8)!;
+    return Color.lerp(colorOf(context), onColorOf(context), .65)!;
   }
 }

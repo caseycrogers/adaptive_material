@@ -20,29 +20,33 @@ class AdaptiveMaterial extends StatelessWidget {
     Key? key,
     required this.material,
     required this.child,
+    this.shouldDraw = true,
   }) : super(key: key);
 
   /// An [AdaptiveMaterial] widget based on the color scheme's primary color.
   const AdaptiveMaterial.primary({super.key, required this.child})
-      : material = AdaptiveMaterialType.primary;
-
+      : shouldDraw = true,
+        material = AdaptiveMaterialType.primary;
 
   /// An [AdaptiveMaterial] widget based on the color scheme's secondary color.
   const AdaptiveMaterial.secondary({super.key, required this.child})
-      : material = AdaptiveMaterialType.secondary;
+      : shouldDraw = true,
+        material = AdaptiveMaterialType.secondary;
 
   /// An [AdaptiveMaterial] widget based on the color scheme's error color.
   const AdaptiveMaterial.error({super.key, required this.child})
-      : material = AdaptiveMaterialType.error;
+      : shouldDraw = true,
+        material = AdaptiveMaterialType.error;
 
   /// An [AdaptiveMaterial] widget based on the color scheme's background color.
   const AdaptiveMaterial.background({super.key, required this.child})
-      : material = AdaptiveMaterialType.background;
-
+      : shouldDraw = true,
+        material = AdaptiveMaterialType.background;
 
   /// An [AdaptiveMaterial] widget based on the color scheme's surface color.
   const AdaptiveMaterial.surface({super.key, required this.child})
-      : material = AdaptiveMaterialType.surface;
+      : shouldDraw = true,
+        material = AdaptiveMaterialType.surface;
 
   /// The [AdaptiveMaterialType] used to style this widget and it's children.
   final AdaptiveMaterialType material;
@@ -50,23 +54,77 @@ class AdaptiveMaterial extends StatelessWidget {
   /// The widget to draw beneath this.
   final Widget child;
 
+  /// Whether or not to draw a background color behind [child].
+  ///
+  /// This is useful for manually specifying the background of child widgets
+  /// according to the [AdaptiveMaterial] without drawing anything behind them.
+  final bool shouldDraw;
+
+  static AdaptiveMaterialType? of(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<_InheritedMaterialType>()
+        ?.adaptiveMaterialType;
+  }
+
+  static Color? colorOf(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<_InheritedMaterialType>()
+        ?.adaptiveMaterialType
+        .colorOf(context);
+  }
+
+  static Color? onColorOf(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<_InheritedMaterialType>()
+        ?.adaptiveMaterialType
+        .onColorOf(context);
+  }
+
+  static Color? secondaryOnColorOf(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<_InheritedMaterialType>()
+        ?.adaptiveMaterialType
+        .secondaryOnColorOf(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     final Color color = material.colorOf(context);
     final Color onColor = material.onColorOf(context);
     final Color secondaryOnColor = material.secondaryOnColorOf(context);
-    return Material(
-      color: color,
-      // TODO(caseycrogers): consider switching to defining the text style in
-      //  terms of the color scheme and then set the default text style
-      //  accordingly.
-      textStyle: TextStyle(color: onColor),
+    final Widget themedChild = DefaultTextStyle(
+      style: TextStyle(color: onColor),
       child: IconTheme(
         data: IconThemeData(
           color: secondaryOnColor,
         ),
-        child: child,
+        child: _InheritedMaterialType(
+          adaptiveMaterialType: material,
+          child: child,
+        ),
       ),
     );
+    if (shouldDraw) {
+      return Material(
+        color: color,
+        child: themedChild,
+      );
+    }
+    return themedChild;
+  }
+}
+
+class _InheritedMaterialType extends InheritedWidget {
+  const _InheritedMaterialType({
+    Key? key,
+    required this.adaptiveMaterialType,
+    required Widget child,
+  }) : super(key: key, child: child);
+
+  final AdaptiveMaterialType adaptiveMaterialType;
+
+  @override
+  bool updateShouldNotify(_InheritedMaterialType old) {
+    return old.adaptiveMaterialType != adaptiveMaterialType;
   }
 }
