@@ -39,9 +39,9 @@ app.*.symbols
 app.*.map.json
 
 # We don't need to publish any of the platform outputs
-/android
-/ios
-/web
-/linux
-/macos
-/windows
+example/android
+example/ios
+example/web
+example/linux
+example/macos
+example/windows
