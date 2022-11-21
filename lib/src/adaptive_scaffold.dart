@@ -2,7 +2,12 @@ import 'package:adaptive_material/adaptive_material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+/// The Adaptive Material system's alternative to [Scaffold].
+///
+/// This is just a wrapper on top of [Scaffold] that injects the Adaptive
+/// Material's color system where appropriate.
 class AdaptiveScaffold extends StatelessWidget {
+  /// See [Scaffold].
   const AdaptiveScaffold({
     super.key,
     this.backgroundMaterial = AdaptiveMaterialType.background,
@@ -31,6 +36,10 @@ class AdaptiveScaffold extends StatelessWidget {
     this.restorationId,
   });
 
+  /// The material to draw behind the body of the scaffold.
+  ///
+  /// All text in the body will automatically use the on color corresponding to
+  /// this material. All icons will use the secondary on color.
   final AdaptiveMaterialType backgroundMaterial;
 
   /// See [Scaffold].

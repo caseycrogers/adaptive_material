@@ -8,13 +8,24 @@ import 'package:flutter/material.dart';
 ///
 /// TODO(caseycrogers): Add values for the remaining eligible attribute pairs.
 enum AdaptiveMaterialType {
+  /// Corresponds to [ColorScheme.primary].
   primary,
+
+  /// Corresponds to [ColorScheme.secondary].
   secondary,
+
+  /// Corresponds to [ColorScheme.error].
   error,
+
+  /// Corresponds to [ColorScheme.background].
   background,
+
+  /// Corresponds to [ColorScheme.surface].
   surface,
 }
 
+/// An extension that adds static methods to map material types to their
+/// respective colors from [ColorScheme]
 extension TypeHelpers on AdaptiveMaterialType {
   /// Converts this material type to the corresponding color from the scheme
   /// provided in the given context.

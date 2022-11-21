@@ -2,7 +2,13 @@ import 'package:adaptive_material/adaptive_material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+
+/// The Adaptive Material system's alternative to [AppBar].
+///
+/// This is just a wrapper on top of [AppBar] that injects the Adaptive
+/// Material's color system where appropriate.
 class AdaptiveAppBar extends StatelessWidget implements PreferredSizeWidget {
+  /// See [AppBar].
   AdaptiveAppBar({
     super.key,
     this.material,
@@ -18,18 +24,8 @@ class AdaptiveAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.shadowColor,
     this.surfaceTintColor,
     this.shape,
-    @Deprecated(
-      'This property is no longer used, please use systemOverlayStyle instead. '
-      'This feature was deprecated after v2.4.0-0.0.pre.',
-    )
-        this.brightness,
     this.iconTheme,
     this.actionsIconTheme,
-    @Deprecated(
-      'This property is no longer used, please use toolbarTextStyle and titleTextStyle instead. '
-      'This feature was deprecated after v2.4.0-0.0.pre.',
-    )
-        this.textTheme,
     this.primary = true,
     this.centerTitle,
     this.excludeHeaderSemantics = false,
@@ -38,11 +34,6 @@ class AdaptiveAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.bottomOpacity = 1.0,
     this.toolbarHeight,
     this.leadingWidth,
-    @Deprecated(
-      'This property is obsolete and is false by default. '
-      'This feature was deprecated after v2.4.0-0.0.pre.',
-    )
-        this.backwardsCompatibility,
     this.toolbarTextStyle,
     this.titleTextStyle,
     this.systemOverlayStyle,
@@ -50,6 +41,9 @@ class AdaptiveAppBar extends StatelessWidget implements PreferredSizeWidget {
             _PreferredAppBarSize(toolbarHeight, bottom?.preferredSize.height);
 
   /// The material to use for the background of the app bar.
+  ///
+  /// All foreground elements (text, icons, etc) will use the on color
+  /// corresponding to this material.
   ///
   /// To match [AppBar.backgroundColor]'s default behavior as closely as
   /// possible, this is set to [AdaptiveMaterialType.primary] if the current
@@ -69,20 +63,18 @@ class AdaptiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color? shadowColor;
   final Color? surfaceTintColor;
   final ShapeBorder? shape;
-  final Brightness? brightness;
   final IconThemeData? iconTheme;
   final IconThemeData? actionsIconTheme;
-  final TextTheme? textTheme;
   final bool primary;
   final bool? centerTitle;
   final bool excludeHeaderSemantics;
   final double? titleSpacing;
   final double toolbarOpacity;
   final double bottomOpacity;
+  @override
   final Size preferredSize;
   final double? toolbarHeight;
   final double? leadingWidth;
-  final bool? backwardsCompatibility;
   final TextStyle? toolbarTextStyle;
   final TextStyle? titleTextStyle;
   final SystemUiOverlayStyle? systemOverlayStyle;
@@ -111,10 +103,8 @@ class AdaptiveAppBar extends StatelessWidget implements PreferredSizeWidget {
       shadowColor: shadowColor,
       surfaceTintColor: surfaceTintColor,
       shape: shape,
-      brightness: brightness,
       iconTheme: iconTheme,
       actionsIconTheme: actionsIconTheme,
-      textTheme: textTheme,
       primary: primary,
       centerTitle: centerTitle,
       excludeHeaderSemantics: excludeHeaderSemantics,
@@ -123,7 +113,6 @@ class AdaptiveAppBar extends StatelessWidget implements PreferredSizeWidget {
       bottomOpacity: bottomOpacity,
       toolbarHeight: toolbarHeight,
       leadingWidth: leadingWidth,
-      backwardsCompatibility: backwardsCompatibility,
       toolbarTextStyle: toolbarTextStyle,
       titleTextStyle: titleTextStyle,
       systemOverlayStyle: systemOverlayStyle,

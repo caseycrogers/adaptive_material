@@ -1,7 +1,12 @@
 import 'package:adaptive_material/adaptive_material.dart';
 import 'package:flutter/material.dart';
 
+/// The Adaptive Material system's alternative to [FloatingActionButton].
+///
+/// This is just a wrapper on top of [FloatingActionButton] that injects the
+/// Adaptive Material's color system where appropriate.
 class AdaptiveFloatingActionButton extends StatelessWidget {
+  /// See [FloatingActionButton].
   const AdaptiveFloatingActionButton({
     super.key,
     this.material = AdaptiveMaterialType.secondary,
@@ -33,6 +38,7 @@ class AdaptiveFloatingActionButton extends StatelessWidget {
         extendedPadding = null,
         extendedTextStyle = null;
 
+  /// See [FloatingActionButton.small].
   const AdaptiveFloatingActionButton.small({
     super.key,
     this.material = AdaptiveMaterialType.secondary,
@@ -62,6 +68,7 @@ class AdaptiveFloatingActionButton extends StatelessWidget {
         extendedPadding = null,
         extendedTextStyle = null;
 
+  /// See [FloatingActionButton.large].
   const AdaptiveFloatingActionButton.large({
     super.key,
     this.material = AdaptiveMaterialType.secondary,
@@ -91,6 +98,10 @@ class AdaptiveFloatingActionButton extends StatelessWidget {
         extendedPadding = null,
         extendedTextStyle = null;
 
+  /// The material to use for the background of the button.
+  ///
+  /// All foreground elements (text, icons, etc) will use the on color
+  /// corresponding to this material.
   final AdaptiveMaterialType material;
 
   final Widget? child;

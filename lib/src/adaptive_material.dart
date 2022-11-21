@@ -60,12 +60,15 @@ class AdaptiveMaterial extends StatelessWidget {
   /// according to the [AdaptiveMaterial] without drawing anything behind them.
   final bool shouldDraw;
 
+  /// The material type of the nearest enclosing adaptive material widget.
   static AdaptiveMaterialType? of(BuildContext context) {
     return context
         .dependOnInheritedWidgetOfExactType<_InheritedMaterialType>()
         ?.adaptiveMaterialType;
   }
 
+  /// The default background color according to the nearest enclosing adaptive
+  /// material widget.
   static Color? colorOf(BuildContext context) {
     return context
         .dependOnInheritedWidgetOfExactType<_InheritedMaterialType>()
@@ -73,6 +76,8 @@ class AdaptiveMaterial extends StatelessWidget {
         .colorOf(context);
   }
 
+  /// The default foreground element color according to the nearest enclosing
+  /// adaptive material widget.
   static Color? onColorOf(BuildContext context) {
     return context
         .dependOnInheritedWidgetOfExactType<_InheritedMaterialType>()
@@ -80,6 +85,8 @@ class AdaptiveMaterial extends StatelessWidget {
         .onColorOf(context);
   }
 
+  /// The default secondary foreground element (icons) color according to the
+  /// nearest enclosing adaptive material widget.
   static Color? secondaryOnColorOf(BuildContext context) {
     return context
         .dependOnInheritedWidgetOfExactType<_InheritedMaterialType>()

@@ -1,16 +1,29 @@
-# adaptive_material
+Never manually define text or icon colors again!
 
-A new Flutter project.
+Adaptive Material is an alternative to `Material` and the material widget suite
+(`Scaffold`, `AppBar`, etc) that uses `ColorScheme` and inherited widgets to 
+automatically set the color of foreground elements (`Text`, `Icon`, etc) to 
+correspond to the color of the backgrounds they're drawn on top of.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Anywhere where you would use `Material`, or `Scaffold` etc, use the corresponding
+`Adaptive*` widget instead.
+The `AdaptiveMaterial` system will use `DefaultTextStyle` and `IconTheme` to style all
+widgets below it with the correct foreground element color according to `colorScheme`.
 
-A few resources to get you started if this is your first Flutter project:
+```dart
+class MyWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return AdaptiveMaterial.surface(
+      child: Text(
+        'This text will be drawn on top of `ColorScheme.surface` and will automatically '
+        'use `ColorScheme.onSurface` as its text color.',
+      ),
+    );
+  }
+}
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+For more detailed usage, see the included full example.
