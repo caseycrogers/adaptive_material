@@ -2,7 +2,7 @@ name: adaptive_material
 description: A color system that means you never manually define text or icon colors again!
 repository: https://github.com/caseycrogers/adaptive_material
 
-version: 0.1.0
+version: 0.1.1
 
 environment:
   sdk: '>=2.18.4 <3.0.0'
